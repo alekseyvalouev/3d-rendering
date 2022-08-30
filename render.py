@@ -78,11 +78,11 @@ while True:
     if keyboard.is_pressed("s"):
         cam = np.add(cam, rotate_vector(back, cam_angle))
 
-    if keyboard.is_pressed("down"):
-        cam_angle = np.add(cam_angle,  (-1*math.pi/3600, 0, 0))
+    #if keyboard.is_pressed("down"):
+    #   cam_angle = np.add(cam_angle,  (-1*math.pi/3600, 0, 0))
 
-    if keyboard.is_pressed("up"):
-        cam_angle = np.add(cam_angle,  (math.pi/3600, 0, 0))
+    #if keyboard.is_pressed("up"):
+    #    cam_angle = np.add(cam_angle,  (1*math.pi/3600, 0, 0))
 
     if keyboard.is_pressed("left"):
         cam_angle = np.add(cam_angle,  (0, -1*math.pi/3600, 0))
