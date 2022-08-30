@@ -1,6 +1,8 @@
-from rendering_math import convert_point
+from rendering_math import *
 import sys
 import pygame
+import keyboard
+import numpy as np
 import math
 
 def drawPoint(point):
@@ -21,7 +23,7 @@ w, h = 1000, 500
 black = (0, 0, 0)
 red = (255, 0, 0)
 
-cam = [0, 0, 0] 
+cam = (0, 0, 0) 
 
 cam_angle = (0, 0, 0)
 
@@ -49,26 +51,44 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-        if event.type == pygame.KEYDOWN:
+    speed = 0.005
+    
+    up = (0, speed, 0)
+    down = (0, -speed, 0)
+    fwd = (0, 0, speed)
+    back = (0, 0, -speed)
+    left = (-speed, 0, 0)
+    right = (speed, 0, 0)
 
-            if event.key == pygame.K_SPACE:
-                cam[1] = cam[1] - 0.1
+    if keyboard.is_pressed(" "):
+        cam = np.add(cam, rotate_vector(down, cam_angle))
 
-            if event.key == pygame.K_LSHIFT:
-                cam[1] = cam[1] + 0.1
+    if keyboard.is_pressed("cmd"):
+        cam = np.add(cam, rotate_vector(up, cam_angle))
 
-            if event.key == pygame.K_d:
-                cam[0] = cam[0] + 0.1
+    if keyboard.is_pressed("d"):
+        cam = np.add(cam, rotate_vector(right, cam_angle))
 
-            if event.key == pygame.K_a:
-                cam[0] = cam[0] - 0.1
+    if keyboard.is_pressed("a"):
+        cam = np.add(cam, rotate_vector(left, cam_angle))
 
-            if event.key == pygame.K_w:
-                cam[2] = cam[2] + 0.1
+    if keyboard.is_pressed("w"):
+        cam = np.add(cam, rotate_vector(fwd, cam_angle))
 
-            if event.key == pygame.K_s:
-                cam[2] = cam[2] - 0.1
+    if keyboard.is_pressed("s"):
+        cam = np.add(cam, rotate_vector(back, cam_angle))
 
+    if keyboard.is_pressed("down"):
+        cam_angle = np.add(cam_angle,  (-1*math.pi/3600, 0, 0))
+
+    if keyboard.is_pressed("up"):
+        cam_angle = np.add(cam_angle,  (math.pi/3600, 0, 0))
+
+    if keyboard.is_pressed("left"):
+        cam_angle = np.add(cam_angle,  (0, -1*math.pi/3600, 0))
+
+    if keyboard.is_pressed("right"):
+        cam_angle = np.add(cam_angle,  (0, math.pi/3600, 0))
 
     screen.fill(black)
 

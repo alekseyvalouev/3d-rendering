@@ -1,6 +1,31 @@
 import math
 import numpy as np
 
+def rotate_vector(vector, angle):
+    m1 = (
+        [1, 0, 0],
+        [0, math.cos(angle[0]), -1*math.sin(angle[0])],
+        [0, math.sin(angle[0]), math.cos(angle[0])]
+    )
+
+    m2 = (
+        [math.cos(angle[1]), 0, math.sin(angle[1])],
+        [0, 1, 0],
+        [-1*math.sin(angle[1]), 0, math.cos(angle[1])]
+    )
+
+    m1 = np.dot(m1, m2)
+
+    m2 = (
+        [math.cos(angle[2]), -1*math.sin(angle[2]), 0],
+        [math.sin(angle[2]), math.cos(angle[2]), 0],
+        [0, 0, 1]
+    )
+
+    m1 = np.dot(m1, m2)
+
+    return np.dot(m1, vector)
+
 def convert_point(coords, camera, angle, w, h):
 
     """ coords: coordinates of object in 3D
@@ -10,6 +35,8 @@ def convert_point(coords, camera, angle, w, h):
     h: height of viewport"""
 
     focal_distance = 1
+
+    #replace this with the rotation function later
 
     m1 = (
         [1, 0, 0],
