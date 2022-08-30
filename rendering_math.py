@@ -34,7 +34,9 @@ def convert_point(coords, camera, angle, w, h):
     w: width of viewport
     h: height of viewport"""
 
-    focal_distance = 1
+    fov = math.pi/2
+
+    focal_distance = 1/math.tan(fov/2)
 
     #replace this with the rotation function later
 
