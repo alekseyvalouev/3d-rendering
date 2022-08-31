@@ -85,10 +85,10 @@ while True:
     #    cam_angle = np.add(cam_angle,  (1*math.pi/3600, 0, 0))
 
     if keyboard.is_pressed("left"):
-        cam_angle = np.add(cam_angle,  (0, -1*math.pi/3600, 0))
+        cam_angle = np.add(cam_angle,  (0, -1*math.pi/360, 0))
 
     if keyboard.is_pressed("right"):
-        cam_angle = np.add(cam_angle,  (0, math.pi/3600, 0))
+        cam_angle = np.add(cam_angle,  (0, math.pi/360, 0))
 
     screen.fill(black)
 
